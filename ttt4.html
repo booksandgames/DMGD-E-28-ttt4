@@ -1,0 +1,133 @@
+<html>
+  <head>
+    <title>Tic Tac Toe</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .square {
+        border: 1px solid black;
+        box-sizing: border-box;
+        height: 80px;
+        width: 80px;
+        padding-top: 20px;
+        margin: 1px;
+        text-align: center;
+        font-size: 40px;
+      }
+      .square:hover {
+        background-color: lavender;
+      }
+      #sq0,
+      #sq3,
+      #sq6 {
+        position: fixed;
+        left: 0;
+      }
+      #sq1,
+      #sq4,
+      #sq7 {
+        position: fixed;
+        left: 85;
+      }
+      #sq2,
+      #sq5,
+      #sq8 {
+        position: fixed;
+        left: 170;
+      }
+      #sq0,
+      #sq1,
+      #sq2 {
+        top: 100;
+      }
+      #sq3,
+      #sq4,
+      #sq5 {
+        top: 185;
+      }
+      #sq6,
+      #sq7,
+      #sq8 {
+        top: 270;
+      }
+      #gameInfo {
+        position: fixed;
+        top: 380;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      #turnBox,
+      #winnerBox {
+        border: 3px solid gray;
+        border-radius: 20px;
+        display: flex;
+        background-color: lavender;
+      }
+
+      .description {
+        border-right: 3px solid gray;
+        padding: 15px;
+      }
+      .update {
+        padding: 15px;
+      }
+      #turnUpdate {
+        padding-left: 45px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tic Tac Toe</h1>
+    <br />
+    <div id="gameInfo">
+      <div id="turnBox">
+        <div class="description">Current Player's Turn:</div>
+        <div class="update" id="turnUpdate"></div>
+      </div>
+      <br />
+      <div id="winnerBox">
+        <div class="description">The Winner Is:</div>
+        <div class="update">To Be Determined</div>
+      </div>
+    </div>
+    <script>
+      const NUM_SQUARES = 9;
+      const randomNum = Math.random();
+      let currentPlayer;
+      if (randomNum >= 0.5) {
+        currentPlayer = 'X';
+      } else {
+        currentPlayer = 'O';
+      }
+      const turnUpdate = document.getElementById('turnUpdate');
+      turnUpdate.innerText = currentPlayer;
+      for (i = 0; i < NUM_SQUARES; i++) {
+        id = 'sq' + i;
+        document.write("<div class='square' id='" + id + "'></div>");
+        const currentSquare = document.getElementById(id);
+        const currentNum = i;
+        currentSquare.onclick = function () {
+          if (currentPlayer === 'X' && currentSquare.innerText === '') {
+            currentSquare.innerText = 'X';
+            alert('You just placed an X in square ' + currentNum + '.');
+            currentPlayer = 'O';
+          } else if (currentPlayer === 'O' && currentSquare.innerText === '') {
+            currentSquare.innerText = 'O';
+            alert('You just placed an O in square ' + currentNum + '.');
+            currentPlayer = 'X';
+          } else {
+            alert(
+              'You cannot select this square because it has been previously selected this game.  Please choose a different squre.'
+            );
+          }
+          const turnUpdate = document.getElementById('turnUpdate');
+          turnUpdate.innerText = currentPlayer;
+        };
+      }
+    </script>
+  </body>
+</html>
